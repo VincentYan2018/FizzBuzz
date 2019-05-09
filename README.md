@@ -9,11 +9,8 @@ A programming challenge that prints the numbers from 1 to 100, where multiples o
    when system print
    then print "the number should be integer"
 3. Given number eithor times of 3 or 5 
-
-       when system print
-
-       then the system will print the number
-
+   when system print
+   then the system will print the number
 2. Given number is times of 3
    when system print
    then the system will print Fizz
