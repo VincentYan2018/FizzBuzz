@@ -12,15 +12,45 @@ namespace FizzBuzz
         }
 
 
-        public Ticket Park()
+        public string Park()
         {
+            if (AvailableParkingSpaceNum == 0)
+            {
+                throw new InvalidOperationException("There are no available parking space!");
+            }
+
             AvailableParkingSpaceNum--;
-            return new Ticket();
+            return "ticket";
         }
 
-        public int PickUpCar(Ticket ticket)
+        public void PickUpCar(string ticket)
         {
-            return ++AvailableParkingSpaceNum;
+            VerifyTicket(ticket);
+
+            VerifyParkingCar();
+
+            ++AvailableParkingSpaceNum;
+        }
+
+        void VerifyParkingCar()
+        {
+            if (AvailableParkingSpaceNum == ParkingSpaceNum)
+            {
+                throw new InvalidOperationException("There is no such car!");
+            }
+        }
+
+        static void VerifyTicket(string ticket)
+        {
+            if (ticket == null)
+            {
+                throw new InvalidOperationException("Parking ticket is required!");
+            }
+
+            if (!ticket.Equals("ticket"))
+            {
+                throw new InvalidOperationException("Parking ticket invalid!");
+            }
         }
 
         public int GetParkingSpaceNum()

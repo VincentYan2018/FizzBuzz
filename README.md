@@ -29,23 +29,26 @@ A programming challenge that prints the numbers from 1 to 100, where multiples o
    
 ## Task2
    
-1. Given 停车位足够，有汽车停车
+1. Given 停车场车位20,剩余20
    when  停车
-   then  停车成功，生成停车票
+   then  停车成功，生成停车票'ticket',可用车位19
+   
+2. Given 停车场车位3,剩余0,汽车停车
+   when  停车
+   then  停车失败，提示"There are no available parking space!"
       
-2. Given 使用有效停车票取车
+3. Given 停车场车位20,剩余19,使用停车票'ticket'取车
    when  取车
-   then  成功取到汽车
-
-3. Given 停车位已满，汽车停车
-   when  停车
-   then  提示"车位已满"
+   then  成功取到汽车,可用车位20
    
-4. Given 使用无效停车票来取车
+4. Given 使用无效停车票'invalidTicket'取车
    when  取车
-   then  显示"停车票无效!"
+   then  取车失败，显示"Parking ticket invalid!"
    
-5. Given 当无停车票来取车
+5. Given 停车场无车，使用停车票'ticket'取车
    when  取车
-   then  显示"需停车票取票"
-
+   then  取车失败，显示"There is no such car!"
+      
+6. Given 当无停车票来取车
+   when  取车
+   then  取车失败，显示"Parking ticket is required!"
