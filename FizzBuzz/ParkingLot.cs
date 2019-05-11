@@ -1,61 +1,40 @@
+using System.Collections.Generic;
+
 namespace FizzBuzz
 {
     public class ParkingLot
     {
-        public int AvailableParkingSpaceNum { get; set; }
-        public int ParkingSpaceNum { get; }
+        readonly int capacity;
+        Dictionary<CarTicket, Car> cars;
 
-        public ParkingLot(int parkingSpaceNum)
+        public ParkingLot(int capacity)
         {
-            ParkingSpaceNum = parkingSpaceNum;
-            AvailableParkingSpaceNum = parkingSpaceNum;
+            this.capacity = capacity;
+            cars = new Dictionary<CarTicket, Car>();
         }
 
-
-        public string Park()
+        public CarTicket Park(Car car)
         {
-            if (AvailableParkingSpaceNum == 0)
+            
+            if (GetAvailableParkingSpace() == 0)
             {
-                throw new InvalidOperationException("There are no available parking space!");
+                throw new NoAvailableParkingSpaceException();
             }
 
-            AvailableParkingSpaceNum--;
-            return "ticket";
+            CarTicket carTicket = new CarTicket();
+            cars.Add(carTicket, car);
+            
+            return carTicket;
         }
 
-        public void PickUpCar(string ticket)
+        public int GetAvailableParkingSpace()
         {
-            VerifyTicket(ticket);
-
-            VerifyParkingCar();
-
-            ++AvailableParkingSpaceNum;
+            return capacity - cars.Count;
         }
 
-        void VerifyParkingCar()
+        public Car GetCar(CarTicket carTicket)
         {
-            if (AvailableParkingSpaceNum == ParkingSpaceNum)
-            {
-                throw new InvalidOperationException("There is no such car!");
-            }
-        }
-
-        static void VerifyTicket(string ticket)
-        {
-            if (ticket == null)
-            {
-                throw new InvalidOperationException("Parking ticket is required!");
-            }
-
-            if (!ticket.Equals("ticket"))
-            {
-                throw new InvalidOperationException("Parking ticket invalid!");
-            }
-        }
-
-        public int GetParkingSpaceNum()
-        {
-            return AvailableParkingSpaceNum;
+            return cars.GetValueOrDefault(carTicket);
         }
     }
 }
