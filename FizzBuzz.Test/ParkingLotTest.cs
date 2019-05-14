@@ -11,7 +11,6 @@ namespace FizzBuzz.Test
             var ticket = parkingLot.Park(new Car());
 
             Assert.NotNull(ticket);
-            Assert.Equal(19, parkingLot.GetAvailableParkingSpace());
         }
 
         [Fact]
@@ -44,23 +43,23 @@ namespace FizzBuzz.Test
         void should_get_parked_car_successfully_when_get_specific_car_with_existed_two_car()
         {
             var parkingLot = new ParkingLot(20);
-            var car1 = new Car();
-            var car2 = new Car();
-            var carTicket1 = parkingLot.Park(car1);
-            var carTicket2 = parkingLot.Park(car2);
-            Assert.Same(car2, parkingLot.GetCar(carTicket2));
+            var firstCar = new Car();
+            var secondCar = new Car();
+            var firstCarTicket = parkingLot.Park(firstCar);
+            var secondCarTicket = parkingLot.Park(secondCar);
+            Assert.Same(secondCar, parkingLot.GetCar(secondCarTicket));
         }
-        
-        
+
+
         [Fact]
         void should_get_parked_car_successfully_when_get_specific_car_with_park_another_car_later()
         {
             var parkingLot = new ParkingLot(20);
-            var car1 = new Car();
-            var car2 = new Car();
-            var carTicket1 = parkingLot.Park(car1);
-            var carTicket2 = parkingLot.Park(car2);
-            Assert.Same(car1, parkingLot.GetCar(carTicket1));
+            var firstCar = new Car();
+            var secondCar = new Car();
+            var firstCarTicket = parkingLot.Park(firstCar);
+            var secondCarTicket = parkingLot.Park(secondCar);
+            Assert.Same(firstCar, parkingLot.GetCar(firstCarTicket));
         }
     }
 }

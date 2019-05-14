@@ -5,36 +5,35 @@ namespace FizzBuzz
     public class ParkingLot
     {
         readonly int capacity;
-        Dictionary<CarTicket, Car> cars;
+        readonly Dictionary<Ticket, Car> parkedCars;
 
         public ParkingLot(int capacity)
         {
             this.capacity = capacity;
-            cars = new Dictionary<CarTicket, Car>();
+            parkedCars = new Dictionary<Ticket, Car>();
         }
 
-        public CarTicket Park(Car car)
+        public Ticket Park(Car car)
         {
-            
             if (GetAvailableParkingSpace() == 0)
             {
                 throw new NoAvailableParkingSpaceException();
             }
 
-            CarTicket carTicket = new CarTicket();
-            cars.Add(carTicket, car);
-            
-            return carTicket;
+            var ticket = new Ticket();
+            parkedCars.Add(ticket, car);
+
+            return ticket;
         }
 
-        public int GetAvailableParkingSpace()
+        int GetAvailableParkingSpace()
         {
-            return capacity - cars.Count;
+            return capacity - parkedCars.Count;
         }
 
-        public Car GetCar(CarTicket carTicket)
+        public Car GetCar(Ticket ticket)
         {
-            return cars.GetValueOrDefault(carTicket);
+            return parkedCars.GetValueOrDefault(ticket);
         }
     }
 }
